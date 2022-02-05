@@ -17,7 +17,7 @@ func sendAnswers(anonEdxId, labName, jsonAnswers string) error {
 	answerServer := os.Getenv("ANSWER_SERVER")
 
 	vals := url.Values{
-		"anon-edx-id": {anonEdxId},
+		"edx-anon-id": {anonEdxId},
 		"lab-answers": {jsonAnswers},
 		"labname":     {labName},
 	}

@@ -1,7 +1,6 @@
 FROM golang:1.12.0-alpine3.9
 RUN mkdir /app
 ADD *.go /app/
-ADD submitter /app/
 WORKDIR /app
 RUN apk add git # try to not need the next three lines
 RUN go get "github.com/abbot/go-http-auth"
