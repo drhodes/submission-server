@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: submitter
+  namespace: edxj
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: submitter
+  template:
+    metadata:
+      labels:
+        name: submitter
+    spec:
+      containers:
+      - name: submitter
+        image: rhodesd/submitter:v1.6
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 3000
+        # https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
+        env:
+        # TODO document these.
+        - name: STAFF_SUBMITTER_USERID 
+          value: ""
+        - name: STAFF_SUBMITTER_PASSWD
+          value: ""
+        - name: ANSWER_SERVER
+          value: ""
+        - name: ANSWER_SERVER_USERID
+          value: ""
+        - name: ANSWER_SERVER_PASSWD
+          value: ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: submitter
+  namespace: edxj
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+  selector:
+    name: submitter
