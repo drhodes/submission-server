@@ -37,7 +37,7 @@ dev.work: ## open all files in editor
 
 
 # dockerize ------------------------------------------------------------------
-TAG=v1.7
+TAG=v1.8
 DOCKER_USER=rhodesd
 IMAGE=$(DOCKER_USER)/submitter:$(TAG)
 
